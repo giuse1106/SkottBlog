@@ -1,0 +1,455 @@
+/* Generali e Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Assicura che padding e bordo siano inclusi nella larghezza/altezza dell'elemento */
+}
+
+/* Variabili CSS (Colori, Font, Spazi, Angoli) */
+:root {
+    /* Colori per il Tema Scuro "alla Google" */
+    --primary-color: #8ab4f8; /* Blu Google per link e accenti su sfondo scuro */
+    --primary-darker: #669df6; /* Blu più scuro per stati hover */
+    --background-color-dark: #202124; /* Grigio scuro quasi nero per lo sfondo generale del body */
+    --surface-color-dark: #292a2d; /* Grigio leggermente più chiaro per card, header, footer */
+    --text-color-light: #e8eaed; /* Grigio chiaro per il testo principale */
+    --text-color-muted: #bdc1c6; /* Grigio medio per testo secondario, meta, descrizioni */
+    --border-color-dark: #424242; /* Grigio scuro per bordi e separatori */
+    --shadow-light: rgba(0, 0, 0, 0.2); /* Ombra leggera per elementi sollevati */
+    --shadow-medium: rgba(0, 0, 0, 0.3); /* Ombra media per card */
+    --shadow-heavy: rgba(0, 0, 0, 0.4); /* Ombra più pronunciata al hover */
+
+    /* Font */
+    --font-family-primary: 'Inter', sans-serif; /* Font principale per il corpo del testo */
+    --font-family-headings: 'Inter', sans-serif; /* Font per i titoli, puoi cambiarlo se trovi un'alternativa a Google Sans */
+
+    /* Dimensioni e Spazi */
+    --max-width-container: 1200px; /* Larghezza massima del contenuto centrale */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 40px;
+    --spacing-xl: 60px;
+
+    /* Angoli Arrotondati (Radius) */
+    --border-radius-sm: 8px; /* Piccolo arrotondamento */
+    --border-radius-md: 12px; /* Medio arrotondamento */
+    --border-radius-lg: 16px; /* Grande arrotondamento per card */
+    --border-radius-pill: 9999px; /* Forma a pillola per bottoni */
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--text-color-light);
+    background-color: var(--background-color-dark);
+    -webkit-font-smoothing: antialiased; /* Migliora la resa dei font su WebKit (Chrome, Safari) */
+    text-rendering: optimizeLegibility; /* Migliora la leggibilità del testo */
+}
+
+/* Stili Globali per Link e Bottoni */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transizione fluida al cambio colore */
+}
+
+a:hover {
+    color: var(--primary-darker);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: var(--border-radius-pill);
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--background-color-dark); /* Testo scuro sul bottone blu */
+    box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+.btn.primary-btn:hover {
+    background-color: var(--primary-darker);
+    box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+/* Layout Container */
+.container {
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md); /* Padding laterale */
+}
+
+/* Header Principale */
+.main-header {
+    background-color: var(--surface-color-dark);
+    border-bottom: 1px solid var(--border-color-dark);
+    padding: var(--spacing-md) 0;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    position: sticky; /* L'header rimane in alto durante lo scroll */
+    top: 0;
+    z-index: 1000; /* Assicura che l'header sia sempre sopra gli altri contenuti */
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-title {
+    font-family: var(--font-family-headings);
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.blog-title a {
+    color: var(--text-color-light);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-lg); /* Spazio tra gli elementi del menu */
+}
+
+.main-nav a {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-color-muted);
+    padding: var(--spacing-xs) 0;
+    position: relative; /* Necessario per la pseudo-classe ::after */
+}
+
+/* Animazione Sottolineatura per Navigazione Desktop */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease; /* Animazione sulla larghezza */
+}
+
+.main-nav a:hover,
+.main-nav a.active { /* 'active' può essere usato per la pagina corrente */
+    color: var(--text-color-light);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+/* Menu Toggle (Hamburger) per Mobile */
+.menu-toggle {
+    display: none; /* Nascosto di default su desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    padding: 0;
+    z-index: 1001; /* Sopra il menu quando attivo */
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color-light);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease; /* Animazione delle linee */
+}
+
+.menu-toggle span:nth-child(1) { top: 0; }
+.menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.menu-toggle span:nth-child(3) { bottom: 0; }
+
+/* Animazione Hamburger Icona */
+.menu-toggle.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+
+/* Sezione Hero */
+.hero-section {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--surface-color-dark);
+    margin-bottom: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 6px 12px var(--shadow-medium);
+}
+
+.hero-section h2 {
+    font-family: var(--font-family-headings);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-color-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-section p {
+    font-size: 22px;
+    color: var(--text-color-muted);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Sezione Ultimi Articoli */
+.latest-posts h3 {
+    font-family: var(--font-family-headings);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-color-light);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.posts-grid {
+    display: grid;
+    /* Adatta automaticamente le colonne: minimo 320px, massimo 1fr (uguale distribuzione) */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg); /* Spazio tra le card */
+}
+
+.post-card {
+    background-color: var(--surface-color-dark);
+    border-radius: var(--border-radius-lg); /* Angoli più arrotondati per le card */
+    overflow: hidden;
+    box-shadow: 0 8px 16px var(--shadow-medium);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-8px); /* Effetto "alza" al hover */
+    box-shadow: 0 12px 24px var(--shadow-heavy); /* Ombra più intensa al hover */
+}
+
+.post-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; /* L'immagine copre l'area senza distorsioni */
+    display: block; /* Rimuove lo spazio extra sotto l'immagine */
+}
+
+.post-card .post-content {
+    padding: var(--spacing-md);
+}
+
+.post-card h4 {
+    font-family: var(--font-family-headings);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+.post-card h4 a {
+    color: var(--text-color-light);
+}
+
+.post-card h4 a:hover {
+    color: var(--primary-color);
+}
+
+.post-card .post-meta {
+    font-size: 15px;
+    color: var(--text-color-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.post-card p {
+    font-size: 17px;
+    color: var(--text-color-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.post-card .read-more {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Footer Principale */
+.main-footer {
+    background-color: var(--surface-color-dark);
+    color: var(--text-color-muted);
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color-dark);
+    font-size: 16px;
+}
+
+.main-footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+    text-align: center; /* Centra il testo su mobile */
+}
+
+.main-footer p {
+    margin-bottom: var(--spacing-sm);
+    flex-basis: 100%; /* Forza il copyright ad andare a capo su mobile */
+}
+
+.main-footer .footer-nav {
+    flex-basis: 100%; /* I link del footer vanno a capo su mobile */
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md); /* Spazio tra i link del footer */
+}
+
+.main-footer .footer-nav a {
+    color: var(--text-color-muted);
+    transition: color 0.3s ease;
+}
+
+.main-footer .footer-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design (Media Queries) */
+
+/* Per schermi di tablet e desktop piccoli */
+@media (max-width: 820px) {
+    .main-header .container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .blog-title {
+        width: 100%;
+        text-align: center;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .main-nav {
+        display: none; /* Nasconde la navigazione di default */
+        width: 100%;
+        margin-top: var(--spacing-md);
+        background-color: var(--surface-color-dark); /* Sfondo per il menu mobile */
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-sm) 0;
+        box-shadow: 0 4px 8px var(--shadow-light);
+    }
+
+    .main-nav.active { /* Mostra la navigazione quando la classe 'active' è applicata */
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Gli elementi del menu vanno in colonna */
+        gap: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .main-nav a {
+        padding: var(--spacing-sm) 0;
+        display: block; /* Ogni link occupa la larghezza completa */
+        color: var(--text-color-light); /* Colore del testo più chiaro nel menu mobile */
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra l'icona hamburger */
+        position: absolute;
+        right: var(--spacing-md);
+        top: 30px; /* Allineato con l'header */
+    }
+
+    .hero-section {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .hero-section h2 {
+        font-size: 38px;
+    }
+
+    .hero-section p {
+        font-size: 20px;
+    }
+
+    .latest-posts h3 {
+        font-size: 32px;
+    }
+
+    .posts-grid {
+        grid-template-columns: 1fr; /* Una sola colonna per gli articoli */
+    }
+
+    .main-footer .container {
+        flex-direction: column;
+    }
+
+    .main-footer p {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .main-footer .footer-nav {
+        gap: var(--spacing-sm);
+    }
+
+    .main-footer .footer-nav a {
+        margin: 0 var(--spacing-xs) var(--spacing-xs) var(--spacing-xs);
+    }
+}
+
+/* Per schermi di smartphone */
+@media (max-width: 550px) {
+    .container {
+        padding: 0 var(--spacing-sm); /* Padding laterale ridotto */
+    }
+
+    .hero-section {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+
+    .hero-section h2 {
+        font-size: 32px;
+    }
+
+    .hero-section p {
+        font-size: 18px;
+    }
+
+    .blog-title {
+        font-size: 28px;
+    }
+
+    .main-header {
+        padding: 15px 0;
+    }
+
+    .menu-toggle {
+        top: 25px;
+        right: var(--spacing-sm);
+    }
+
+    .posts-grid {
+        gap: var(--spacing-md);
+    }
+
+    .post-card .post-content {
+        padding: var(--spacing-sm);
+    }
+
+    .post-card h4 {
+        font-size: 20px;
+    }
+    .post-card p {
+        font-size: 15px;
+    }
+}
