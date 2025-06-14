@@ -8,8 +8,8 @@
 /* Variabili CSS (Colors, Fonts, Spacing, Corners) */
 :root {
     /* Colors for "Google-like" Dark Theme */
-    --primary-color: #8ab4f8; /* Google Blue for links and accents on dark background */
-    --primary-darker: #669df6; /* Darker blue for hover states */
+    --primary-color: #6aa6b9; /* Il nuovo azzurro per link e accenti */
+    --primary-darker: #5a8a9b; /* Un azzurro leggermente più scuro per stati hover */
     --background-color-dark: #202124; /* Dark gray almost black for the main body background */
     --surface-color-dark: #292a2d; /* Slightly lighter gray for cards, header, footer surfaces */
     --text-color-light: #e8eaed; /* Light gray for main text */
@@ -106,15 +106,18 @@ a:hover {
 }
 
 .blog-title {
-    font-family: var(--font-family-headings);
-    font-size: 32px;
-    font-weight: 700;
+    font-family: var(--font-family-headings); /* Ripristinato il font per il titolo */
+    font-size: 32px; /* Ripristinato la dimensione del font */
+    font-weight: 700; /* Ripristinato il peso del font */
     margin: 0;
 }
 
 .blog-title a {
-    color: var(--text-color-light);
+    color: var(--text-color-light); /* Il colore del testo del titolo */
 }
+
+/* Rimosse le regole per .blog-title img */
+
 
 .main-nav ul {
     list-style: none;
@@ -336,6 +339,8 @@ a:hover {
         margin-bottom: var(--spacing-md);
     }
 
+    /* Rimosse le regole per .blog-title img */
+
     .main-nav {
         display: none;
         width: 100%;
@@ -355,8 +360,8 @@ a:hover {
     .main-nav.active {
         display: block;
         opacity: 1;
-        max-height: 300px; /* Adjust as needed, should be larger than actual height */
-        transition: opacity 0.3s ease-in, max-height 0.5s ease-in; /* Slightly slower opening */
+        max-height: 300px;
+        transition: opacity 0.3s ease-in, max-height 0.5s ease-in;
     }
 
     .main-nav ul {
@@ -434,8 +439,10 @@ a:hover {
     }
 
     .blog-title {
-        font-size: 28px;
+        font-size: 28px; /* Dimensione del font più piccola su smartphone */
     }
+
+    /* Rimosse le regole per .blog-title img */
 
     .main-header {
         padding: 15px 0;
