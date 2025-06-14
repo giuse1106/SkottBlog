@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Create a Responsive Website - TechCorner</title>
+    <link rel="icon" href="https://i.ibb.co/JWRxPGqV/Tech-Corner-PNG.png" type="image/png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="blog-title"><a href="index.html">TechCorner</a></h1> <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li> <li><a href="#">About</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content container article-page">
+        <article class="full-article">
+            <header class="article-header">
+                <h1 class="article-title">How to Create a Responsive Website</h1>
+                <p class="article-meta">Published on June 14, 2025 by TechCorner Author</p>
+                <img src="https://via.placeholder.com/800x450/333333/FFFFFF?text=Responsive+Design" alt="Image for Responsive Website Article" class="article-hero-image">
+            </header>
+
+            <section class="article-content">
+                <p>In today's digital age, users access websites from a multitude of devices, ranging from large desktop monitors to small smartphones. Ensuring your website looks and functions perfectly across all screen sizes is no longer a luxury, but a necessity. This is where **responsive web design** comes into play.</p>
+
+                <h2>What is Responsive Web Design?</h2>
+                <p>Responsive web design (RWD) is an approach to web design aimed at allowing desktop webpages to be viewed in response to the size of the screen or web browser one is viewing with. It involves a mix of flexible grids and layouts, images, and an intelligent use of CSS media queries.</p>
+                <p>The core idea is to build a single website that adapts its layout and content to fit the user's screen, providing an optimal viewing experience—easy reading and navigation with a minimum of resizing, panning, and scrolling—across a wide range of devices.</p>
+
+                <h3>Key Principles of Responsive Design:</h3>
+                <ol>
+                    <li>
+                        <h4>Fluid Grids:</h4>
+                        <p>Instead of using fixed pixel widths, fluid grids use **relative units like percentages**. This allows the layout to scale up and down smoothly based on the screen size. For example, if you have a two-column layout, instead of setting one column to 600px and the other to 300px, you might set them to 66% and 33% respectively. This ensures they maintain their proportions.</p>
+                    </li>
+                    <li>
+                        <h4>Flexible Images:</h4>
+                        <p>Images can often break a responsive layout if not handled correctly. Flexible images are scaled within their containing element, typically using `max-width: 100%;` in CSS. This ensures images never overflow their parent container and scale down proportionally when the screen size decreases.</p>
+                    </li>
+                    <li>
+                        <h4>Media Queries:</h4>
+                        <p>This is the most powerful tool in responsive design. **CSS Media Queries** allow you to apply different CSS rules based on various characteristics of the device accessing the website, such as screen width, height, resolution, and orientation. For instance, you can change the navigation menu from a horizontal bar to a hamburger icon when the screen width drops below a certain breakpoint (e.g., 768px).</p>
+                        <pre><code>
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+}
+                        </code></pre>
+                    </li>
+                </ol>
+
+                <h2>Implementing Responsive Design: A Practical Approach</h2>
+                <p>When starting a new project, it's often recommended to adopt a **"mobile-first" approach**. This means designing and developing for smaller screens first, then progressively enhancing the layout for larger screens. This forces you to prioritize content and performance, which benefits all users.</p>
+
+                <p>Beyond the core principles, consider the following:</p>
+                <ul>
+                    <li>**Viewport Meta Tag:** Always include `<meta name="viewport" content="width=device-width, initial-scale=1.0">` in your HTML `<head>`. This tells browsers to render the page at the width of the device, preventing them from trying to render a desktop version on a mobile screen.</li>
+                    <li>**Typography:** Adjust font sizes and line heights for different screen sizes to maintain readability.</li>
+                    <li>**Touch Targets:** Ensure interactive elements (buttons, links) are large enough and spaced far enough apart for easy tapping on touch devices.</li>
+                </ul>
+
+                <p>Responsive design is an ongoing process of testing and refinement. Tools like browser developer consoles (e.g., Chrome DevTools' Device Mode) allow you to simulate different screen sizes and test your layouts effectively.</p>
+
+                <p>By embracing these principles, you can create a website that not only looks great but also provides an intuitive and enjoyable experience for every visitor, regardless of how they choose to browse.</p>
+            </section>
+        </article>
+
+        <section class="related-articles">
+            <h3>You Might Also Like</h3>
+            <div class="posts-grid">
+                <article class="post-card">
+                    <img src="https://via.placeholder.com/400x250/333333/FFFFFF?text=Article+2" alt="Article Image 2">
+                    <div class="post-content">
+                        <h4><a href="#">Quick Guide to Flexbox and CSS Grid</a></h4>
+                        <p class="post-meta">Published on June 10, 2025 by TechCorner Author</p>
+                        <p>Learn to layout elements on the page with the powerful CSS properties of Flexbox and Grid.</p>
+                        <a href="#" class="read-more">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <img src="https://via.placeholder.com/400x250/333333/FFFFFF?text=Article+3" alt="Article Image 3">
+                    <div class="post-content">
+                        <h4><a href="#">JavaScript Fundamentals for Beginners</a></h4>
+                        <p class="post-meta">Published on June 05, 2025 by TechCorner Author</p>
+                        <p>From first steps to creating dynamic interactions for your website.</p>
+                        <a href="#" class="read-more">Read More &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 TechCorner. All rights reserved.</p>
+            <div class="footer-nav">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
